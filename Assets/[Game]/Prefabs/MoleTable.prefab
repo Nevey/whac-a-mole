@@ -53,8 +53,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerPrefab: {fileID: 3632527021234142715, guid: 08e4d8950504556408d244b33e2fa1e2,
     type: 3}
-  minWaitDuration: 3
-  maxWaitDuration: 5
+  minWaitDuration: 0.5
+  maxWaitDuration: 2
   spawnPoints:
   - {fileID: 1912606236085721566}
   - {fileID: 3506535115543207407}
