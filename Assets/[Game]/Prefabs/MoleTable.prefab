@@ -48,12 +48,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 932481334599820023}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85d8ef1fc45ee75409203412e9844f02, type: 3}
+  m_Script: {fileID: 11500000, guid: 2e28bc4d406fb4741a03c88def62b7d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   timerPrefab: {fileID: 3632527021234142715, guid: 08e4d8950504556408d244b33e2fa1e2,
     type: 3}
-  minWaitDuration: 0.5
+  minWaitDuration: 0.2
   maxWaitDuration: 2
   spawnPoints:
   - {fileID: 1912606236085721566}

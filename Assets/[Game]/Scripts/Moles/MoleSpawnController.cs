@@ -1,7 +1,7 @@
-using Game.Moles;
+using Game.Spawning;
 using UnityEngine;
 
-namespace Game.Spawning
+namespace Game.Moles
 {
     public class MoleSpawnController : SpawnController<Mole>
     {
