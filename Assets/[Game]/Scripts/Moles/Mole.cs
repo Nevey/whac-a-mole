@@ -9,7 +9,8 @@ namespace Game.Moles
 {
     public class Mole : MonoBehaviour, ISpawnable, IWhackable
     {
-        [SerializeField] private float showDuration = 1f;
+        [SerializeField, Range(0.1f, 3f)] private float minShowDuration = 0.5f;
+        [SerializeField, Range (0.1f, 3f)] private float maxShowDuration = 2f;
         [SerializeField] private MoleView moleViewPrefab;
         [SerializeField] private Timer timerPrefab;
 
@@ -40,7 +41,8 @@ namespace Game.Moles
 
         private void StartTimer()
         {
-            timerInstance.StartTimer(showDuration, Despawn);
+            float duration = UnityEngine.Random.Range(minShowDuration, maxShowDuration);
+            timerInstance.StartTimer(duration, Despawn);
         }
 
         public void Spawn(Vector3 position)

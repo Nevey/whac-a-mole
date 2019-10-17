@@ -13,6 +13,7 @@ namespace Game.Scoring
 
         private void Awake()
         {
+            ResetScore();
             highScore = new Score(PlayerPrefs.GetInt(HIGHSCORE_KEY, 0));
         }
 
@@ -37,8 +38,6 @@ namespace Game.Scoring
 
             // TODO: Do this at the end of the game instead
             CheckForHighscore();
-
-            Debug.Log($"Current Score {totalScore}");
         }
 
         public void ResetScore()
