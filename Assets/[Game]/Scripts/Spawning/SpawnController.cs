@@ -10,7 +10,7 @@ namespace Game.Spawning
     {
         [Header("Spawn Timing")]
         [SerializeField] private Timer timerPrefab;
-        [SerializeField, Range(0.1f, 5f)] private float minWaitDuration = 0.2f;
+        [SerializeField, Range(0.01f, 5f)] private float minWaitDuration = 0.2f;
         [SerializeField, Range(0.1f, 5f)] private float maxWaitDuration = 2f;
 
         [Header("Spawn Points")]

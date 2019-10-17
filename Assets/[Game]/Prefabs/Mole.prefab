@@ -44,7 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b429ef7e1c6f09347ac8dc2914d9fdf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showDuration: 1
+  minShowDuration: 0.2
+  maxShowDuration: 1.5
   moleViewPrefab: {fileID: 6856524614046831746, guid: 80836b29cef1c6a47b97eac3d7e8064b,
     type: 3}
   timerPrefab: {fileID: 3632527021234142715, guid: 08e4d8950504556408d244b33e2fa1e2,
