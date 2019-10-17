@@ -8,11 +8,13 @@ namespace Game.Moles
     {
         public void Show(Action callback)
         {
+            // TODO: Do custom visual stuff here
             callback?.Invoke();
         }
 
         public void Hide(Action callback)
         {
+            // TODO: Do custom visual stuff here
             callback?.Invoke();
         }
     }

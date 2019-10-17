@@ -1,11 +1,13 @@
 using System;
+using Game.Scoring;
 using Game.Spawning;
 using Game.Timers;
+using Game.Whacking;
 using UnityEngine;
 
 namespace Game.Moles
 {
-    public class Mole : MonoBehaviour, ISpawnable
+    public class Mole : MonoBehaviour, ISpawnable, IWhackable
     {
         [SerializeField] private float showDuration = 1f;
         [SerializeField] private MoleView moleViewPrefab;
@@ -32,8 +34,8 @@ namespace Game.Moles
         {
             OnDespawnEvent?.Invoke(this);
 
-            Destroy(moleViewInstance.gameObject);
             moleViewInstance = null;
+            Destroy(gameObject);
         }
 
         private void StartTimer()
@@ -53,6 +55,17 @@ namespace Game.Moles
         {
             Destroy(timerInstance.gameObject);
             Hide();
+        }
+
+        public Score Hit()
+        {
+            int scoreValue =
+                Mathf.RoundToInt((10 / timerInstance.TargetDuration)
+                * (timerInstance.TargetDuration - timerInstance.CurrentDuration));
+
+            Despawn();
+
+            return new Score(scoreValue);
         }
     }
 }

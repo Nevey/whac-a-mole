@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5473469409500570727}
   - component: {fileID: 2468579927960537674}
+  - component: {fileID: 814745626965707528}
   m_Layer: 0
   m_Name: Mole
   m_TagString: Untagged
@@ -48,3 +49,16 @@ MonoBehaviour:
     type: 3}
   timerPrefab: {fileID: 3632527021234142715, guid: 08e4d8950504556408d244b33e2fa1e2,
     type: 3}
+--- !u!65 &814745626965707528
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5473469409500570720}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}

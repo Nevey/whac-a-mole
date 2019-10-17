@@ -10,6 +10,9 @@ namespace Game.Timers
         private float currentDuration;
         private Action callback;
 
+        public float TargetDuration => targetDuration;
+        public float CurrentDuration => currentDuration;
+
         private void Update()
         {
             if (!isStarted)
