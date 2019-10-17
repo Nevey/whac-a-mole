@@ -8,20 +8,20 @@ namespace Game.Scoring
 
         [SerializeField] private ScoreView scoreView;
 
-        private int currentScore;
-        private int highScore;
+        private Score totalScore;
+        private Score highScore;
 
         private void Awake()
         {
-            highScore = PlayerPrefs.GetInt(HIGHSCORE_KEY, 0);
+            highScore = new Score(PlayerPrefs.GetInt(HIGHSCORE_KEY, 0));
         }
 
         private void CheckForHighscore()
         {
-            if (currentScore > highScore)
+            if (totalScore.value > highScore.value)
             {
-                highScore = currentScore;
-                PlayerPrefs.SetInt(HIGHSCORE_KEY, highScore);
+                highScore = new Score(totalScore.value);
+                PlayerPrefs.SetInt(HIGHSCORE_KEY, highScore.value);
             }
         }
 
@@ -32,18 +32,18 @@ namespace Game.Scoring
 
         public void AddScore(Score score)
         {
-            currentScore += score.value;
+            totalScore = new Score(totalScore.value + score.value);
             ShowScore(score);
 
             // TODO: Do this at the end of the game instead
             CheckForHighscore();
 
-            Debug.Log($"Current Score {currentScore}");
+            Debug.Log($"Current Score {totalScore}");
         }
 
         public void ResetScore()
         {
-            currentScore = 0;
+            totalScore = new Score(0);
         }
     }
 }
