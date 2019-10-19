@@ -1,21 +1,24 @@
+using Game.DI;
 using Game.Input;
 using Game.Scoring;
 using UnityEngine;
 
 namespace Game.Whacking
 {
-    public class WhackableHitter : MonoBehaviour
+    public class WhackableHitter : CardboardCoreBehaviour
     {
-        [SerializeField] private MouseInput mouseInput;
-        [SerializeField] private ScoreController scoreController;
+        [Inject] private MouseInput mouseInput;
+        [Inject] private ScoreController scoreController;
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             mouseInput.TapEvent += OnTap;
         }
 
-        private void OnDestroy()
+        protected override void OnDestroy()
         {
+            base.OnDestroy();
             mouseInput.TapEvent -= OnTap;
         }
 

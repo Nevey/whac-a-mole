@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using Utilities;
 
-namespace DI
+namespace Game.DI
 {
     public static class InjectionLayerManager
     {
@@ -54,7 +54,8 @@ namespace DI
                 return (injectionLayers[type], injectableAttribute);
             }
 
-            throw Log.Exception($"InjectionLayer of type {type.Name} is not available! Please check your ApplicationStates");
+            CreateLayer(type);
+            return GetInjectionLayer(fieldInfo);
         }
     }
 }

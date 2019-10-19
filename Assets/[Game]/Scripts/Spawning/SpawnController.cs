@@ -1,41 +1,42 @@
-using System;
 using System.Collections.Generic;
+using Game.DI;
 using Game.Timers;
 using UnityEngine;
 
 namespace Game.Spawning
 {
-    public abstract class SpawnController<T> : MonoBehaviour
+    [Injectable(Singleton = true)]
+    public abstract class SpawnController<T> : CardboardCoreBehaviour
         where T : ISpawnable, new()
     {
+        [Inject] private TimerController timerController;
+
         [Header("Spawn Timing")]
-        [SerializeField] private Timer timerPrefab;
         [SerializeField, Range(0.01f, 5f)] private float minWaitDuration = 0.2f;
         [SerializeField, Range(0.1f, 5f)] private float maxWaitDuration = 2f;
 
         [Header("Spawn Points")]
         [SerializeField] private List<SpawnPoint> spawnPoints;
 
-        private Timer timerInstance;
         private List<SpawnPoint> takenSpawnPoints = new List<SpawnPoint>();
 
         protected abstract T Prefab { get; }
 
-        private void Awake()
+        protected override void Awake()
         {
-            timerInstance = Instantiate(timerPrefab);
+            base.Awake();
             StartSpawnTimer();
         }
 
-        private void OnDestroy()
+        protected override void OnDestroy()
         {
-            timerInstance.Stop();
+            base.OnDestroy();
         }
 
         private void StartSpawnTimer()
         {
             float duration = UnityEngine.Random.Range(minWaitDuration, maxWaitDuration);
-            timerInstance.StartTimer(duration, Spawn);
+            timerController.StartTimer(this, duration, Spawn);
         }
 
         private void Spawn()

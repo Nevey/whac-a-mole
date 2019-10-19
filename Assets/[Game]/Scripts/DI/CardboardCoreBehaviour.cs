@@ -1,6 +1,10 @@
-namespace DI
+namespace Game.DI
 {
-    public abstract class MonoBehaviour : UnityEngine.MonoBehaviour
+    /// <summary>
+    /// Extends Unity's MonoBehaviour, but automatically injects and dumps any fields
+    /// having the Inject attribute
+    /// </summary>
+    public abstract class CardboardCoreBehaviour : UnityEngine.MonoBehaviour
     {
         protected virtual void Awake()
         {

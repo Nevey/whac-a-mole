@@ -1,4 +1,5 @@
 using System;
+using Game.DI;
 using Game.Scoring;
 using Game.Spawning;
 using Game.Timers;
@@ -7,12 +8,13 @@ using UnityEngine;
 
 namespace Game.Moles
 {
-    public class Mole : MonoBehaviour, ISpawnable, IWhackable
+    public class Mole : CardboardCoreBehaviour, ISpawnable, IWhackable
     {
+        [Inject] private TimerController timerController;
+
         [SerializeField, Range(0.1f, 3f)] private float minShowDuration = 0.5f;
         [SerializeField, Range (0.1f, 3f)] private float maxShowDuration = 2f;
         [SerializeField] private MoleView moleViewPrefab;
-        [SerializeField] private Timer timerPrefab;
 
         private MoleView moleViewInstance;
         private Timer timerInstance;
@@ -42,12 +44,11 @@ namespace Game.Moles
         private void StartTimer()
         {
             float duration = UnityEngine.Random.Range(minShowDuration, maxShowDuration);
-            timerInstance.StartTimer(duration, Despawn);
+            timerInstance = timerController.StartTimer(this, duration, Despawn);
         }
 
         public void Spawn(Vector3 position)
         {
-            timerInstance = Instantiate(timerPrefab, transform);
             transform.position = position;
             OnSpawnEvent?.Invoke(this);
             Show();
@@ -55,7 +56,7 @@ namespace Game.Moles
 
         public void Despawn()
         {
-            Destroy(timerInstance.gameObject);
+            timerController.KillTimer(this);
             Hide();
         }
 

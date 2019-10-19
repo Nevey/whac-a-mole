@@ -1,7 +1,7 @@
 using System.Reflection;
 using Utilities;
 
-namespace DI
+namespace Game.DI
 {
     public static class Injector
     {

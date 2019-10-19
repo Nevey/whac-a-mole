@@ -5,7 +5,7 @@ using UnityEngine;
 using Utilities;
 using Object = UnityEngine.Object;
 
-namespace DI
+namespace Game.DI
 {
     public class InjectionLayer
     {
@@ -70,7 +70,8 @@ namespace DI
             {
                 if (fieldInfo.FieldType.IsSubclassOf(typeof(MonoBehaviour)))
                 {
-                    throw Log.Exception($"Non-Singleton Monobehaviour support is not added yet!");
+                    throw Log.Exception($"Non-Singleton Monobehaviour support is not added yet!"
+                        + $"Please change <b>{fieldInfo.FieldType.Name}</b> to be a <b>Singleton</b> Injectable");
                 }
 
                 // TODO: Add Monobehaviour support
@@ -147,6 +148,11 @@ namespace DI
                 if (instancesToRemove[i].GetType().IsSubclassOf(typeof(MonoBehaviour)))
                 {
                     MonoBehaviour mb = (MonoBehaviour)instancesToRemove[i];
+                    if (mb == null)
+                    {
+                        continue;
+                    }
+
                     GameObject gameObject = mb.gameObject;
 
                     MonoBehaviour.Destroy(mb);

@@ -1,6 +1,6 @@
 using System;
 
-namespace DI
+namespace Game.DI
 {
     /// <summary>
     /// Add this attribute to a field to inject an instance into given field

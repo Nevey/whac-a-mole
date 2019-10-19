@@ -1,12 +1,14 @@
+using Game.DI;
 using UnityEngine;
 
 namespace Game.Scoring
 {
+    [Injectable(Singleton = true)]
     public class ScoreController : MonoBehaviour
     {
         private const string HIGHSCORE_KEY = "Whac-a-Mole.HighScore";
 
-        [SerializeField] private ScoreView scoreView;
+        [SerializeField] private ScoreView scoreViewPrefab;
 
         private Score totalScore;
         private Score highScore;

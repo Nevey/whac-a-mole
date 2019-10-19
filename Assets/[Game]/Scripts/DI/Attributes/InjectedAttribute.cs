@@ -1,6 +1,6 @@
 using System;
 
-namespace DI
+namespace Game.DI
 {
     /// <summary>
     /// Add this attribute to a class to make it injectable
