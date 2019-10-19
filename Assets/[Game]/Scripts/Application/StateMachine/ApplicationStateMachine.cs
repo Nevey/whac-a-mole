@@ -9,6 +9,8 @@ namespace Game.Application
         {
             SetInitialState<MenuState>();
             AddTransition<MenuState, GameplayState>();
+            AddTransition<GameplayState, GameOverState>();
+            AddTransition<GameOverState, MenuState>();
         }
     }
 }
