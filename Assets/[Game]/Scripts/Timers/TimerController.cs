@@ -13,24 +13,47 @@ namespace Game.Timers
 
         private Dictionary<Timer, object> timerDict = new Dictionary<Timer, object>();
 
-        public Timer StartTimer(object owner, float duration, Action callback)
+        private Timer GetTimer(object owner)
         {
-            Timer timerInstance = null;
             if (timerDict.ContainsValue(owner))
             {
-                timerInstance = timerDict.FirstOrDefault(x => x.Value == owner).Key;
+                return timerDict.FirstOrDefault(x => x.Value == owner).Key;
             }
+            
+            return null;
+        }
 
-            // If owner didn't own a timer
+        private Timer CreateTimer(object owner)
+        {
+            Timer timerInstance = Instantiate(timerPrefab, transform);
+            timerDict[timerInstance] = owner;
+
+            return timerInstance;
+        }
+
+        private Timer GetOrCreateTimer(object owner)
+        {
+            Timer timerInstance = GetTimer(owner);
+
             if (timerInstance == null)
             {
-                timerInstance = Instantiate(timerPrefab, transform);
-                timerDict[timerInstance] = owner;
+                timerInstance = CreateTimer(owner);
             }
+
+            return timerInstance;
+        }
+
+        public Timer StartTimer(object owner, float duration, Action callback, bool autoKill = true)
+        {
+            Timer timerInstance = GetOrCreateTimer(owner);
 
             timerInstance.StartTimer(duration, () => 
             {
-                KillTimer(owner);
+                if (autoKill)
+                {
+                    KillTimer(owner);
+                }
+
                 callback?.Invoke();
             });
 
@@ -39,11 +62,7 @@ namespace Game.Timers
 
         public void KillTimer(object owner, bool handleCallback = false)
         {
-            Timer timerInstance = null;
-            if (timerDict.ContainsValue(owner))
-            {
-                timerInstance = timerDict.FirstOrDefault(x => x.Value == owner).Key;
-            }
+            Timer timerInstance = GetTimer(owner);
 
             // It's ok if the timer instance didn't exist anymore
             if (timerInstance == null)

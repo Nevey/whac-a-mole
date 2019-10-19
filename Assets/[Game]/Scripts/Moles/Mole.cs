@@ -44,7 +44,7 @@ namespace Game.Moles
         private void StartTimer()
         {
             float duration = UnityEngine.Random.Range(minShowDuration, maxShowDuration);
-            timerInstance = timerController.StartTimer(this, duration, Despawn);
+            timerInstance = timerController.StartTimer(this, duration, Despawn, false);
         }
 
         public void Spawn(Vector3 position)
@@ -62,9 +62,14 @@ namespace Game.Moles
 
         public Score Hit()
         {
-            int scoreValue =
-                Mathf.RoundToInt((10 / timerInstance.TargetDuration)
-                * (timerInstance.TargetDuration - timerInstance.CurrentDuration));
+            int scoreValue = 10;
+
+            if (timerInstance != null)
+            {
+                scoreValue =
+                    Mathf.RoundToInt((10 / timerInstance.TargetDuration)
+                    * (timerInstance.TargetDuration - timerInstance.CurrentDuration));
+            }
 
             Despawn();
 
