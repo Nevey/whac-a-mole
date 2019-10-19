@@ -12,11 +12,11 @@ namespace DI
         private readonly Dictionary<Type, object> dependencies = new Dictionary<Type, object>();
         private readonly Dictionary<object, List<object>> references = new Dictionary<object, List<object>>();
 
-        public void InjectIntoField(FieldInfo fieldInfo, InjectedAttribute injectedAttribute, object @object)
+        public void InjectIntoField(FieldInfo fieldInfo, InjectableAttribute injectableAttribute, object @object)
         {
             object injectedInstance;
 
-            if (injectedAttribute.Singleton)
+            if (injectableAttribute.Singleton)
             {
                 if (dependencies.ContainsKey(fieldInfo.FieldType))
                 {
@@ -81,7 +81,7 @@ namespace DI
 
             fieldInfo.SetValue(@object, injectedInstance);
 
-            if (injectedAttribute.Singleton)
+            if (injectableAttribute.Singleton)
             {
                 Log.Write($"Injected <i>Singleton</i> instance <b>{injectedInstance.GetType().Name}</b> " +
                           $"into <b>{@object.GetType().Name}</b> -- " +

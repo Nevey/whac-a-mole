@@ -11,7 +11,7 @@ namespace DI
 
             for (int i = 0; i < fieldInfos.Length; i++)
             {
-                (InjectionLayer, InjectedAttribute) injectionLayer = InjectionLayerManager.GetInjectionLayer(fieldInfos[i]);
+                (InjectionLayer, InjectableAttribute) injectionLayer = InjectionLayerManager.GetInjectionLayer(fieldInfos[i]);
                 injectionLayer.Item1.InjectIntoField(fieldInfos[i], injectionLayer.Item2, @object);
             }
         }
@@ -22,7 +22,7 @@ namespace DI
             
             for (int i = 0; i < fieldInfos.Length; i++)
             {
-                (InjectionLayer, InjectedAttribute) injectionLayer = InjectionLayerManager.GetInjectionLayer(fieldInfos[i]);
+                (InjectionLayer, InjectableAttribute) injectionLayer = InjectionLayerManager.GetInjectionLayer(fieldInfos[i]);
                 injectionLayer.Item1.DumpDependencies(@object);
             }
         }

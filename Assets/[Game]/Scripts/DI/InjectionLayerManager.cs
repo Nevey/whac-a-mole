@@ -40,18 +40,18 @@ namespace DI
             }
         }
         
-        public static (InjectionLayer, InjectedAttribute) GetInjectionLayer(FieldInfo fieldInfo)
+        public static (InjectionLayer, InjectableAttribute) GetInjectionLayer(FieldInfo fieldInfo)
         {
-            InjectedAttribute injectedAttribute = fieldInfo.FieldType.GetCustomAttribute<InjectedAttribute>();
-            if (injectedAttribute == null)
+            InjectableAttribute injectableAttribute = fieldInfo.FieldType.GetCustomAttribute<InjectableAttribute>();
+            if (injectableAttribute == null)
             {
-                throw Log.Exception($"Class <b>{fieldInfo.FieldType.Name}</b> is missing <b>Injected</b> attribute");
+                throw Log.Exception($"Class <b>{fieldInfo.FieldType.Name}</b> is missing <b>Injectable</b> attribute");
             }
             
-            Type type = injectedAttribute.Layer;
+            Type type = injectableAttribute.Layer;
             if (injectionLayers.ContainsKey(type))
             {
-                return (injectionLayers[type], injectedAttribute);
+                return (injectionLayers[type], injectableAttribute);
             }
 
             throw Log.Exception($"InjectionLayer of type {type.Name} is not available! Please check your ApplicationStates");
