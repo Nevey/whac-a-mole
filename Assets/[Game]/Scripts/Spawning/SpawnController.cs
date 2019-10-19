@@ -22,17 +22,6 @@ namespace Game.Spawning
 
         protected abstract T Prefab { get; }
 
-        protected override void Awake()
-        {
-            base.Awake();
-            StartSpawnTimer();
-        }
-
-        protected override void OnDestroy()
-        {
-            base.OnDestroy();
-        }
-
         private void StartSpawnTimer()
         {
             float duration = UnityEngine.Random.Range(minWaitDuration, maxWaitDuration);
@@ -75,6 +64,16 @@ namespace Game.Spawning
             takenSpawnPoints.Add(spawnPoint);
 
             return spawnPoint;
+        }
+
+        public void StartSpawning()
+        {
+            StartSpawnTimer();
+        }
+
+        public void StopSpawning()
+        {
+            timerController.KillTimer(this);
         }
     }
 }

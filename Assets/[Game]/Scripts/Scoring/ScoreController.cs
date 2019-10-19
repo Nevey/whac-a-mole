@@ -1,3 +1,4 @@
+using System;
 using Game.DI;
 using UnityEngine;
 
@@ -13,6 +14,9 @@ namespace Game.Scoring
         private Score totalScore;
         private Score highScore;
 
+        public event Action<int> ScoreUpdatedEvent;
+        public event Action<int> HighscoreUpdatedEvent;
+
         private void Awake()
         {
             ResetScore();
@@ -25,6 +29,8 @@ namespace Game.Scoring
             {
                 highScore = new Score(totalScore.value);
                 PlayerPrefs.SetInt(HIGHSCORE_KEY, highScore.value);
+
+                HighscoreUpdatedEvent?.Invoke(highScore.value);
             }
         }
 
@@ -37,6 +43,8 @@ namespace Game.Scoring
         {
             totalScore = new Score(totalScore.value + score.value);
             ShowScore(score);
+
+            ScoreUpdatedEvent?.Invoke(totalScore.value);
 
             // TODO: Do this at the end of the game instead
             CheckForHighscore();

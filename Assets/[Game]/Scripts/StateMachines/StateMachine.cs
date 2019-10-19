@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Utilities;
 
 namespace Game.StateMachines
 {
@@ -41,6 +42,7 @@ namespace Game.StateMachines
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
         private State GetState<T>(bool catchException = false)
+            where T : State, new()
         {
             Type type = typeof(T);
             if (stateDict.ContainsKey(type))
@@ -52,8 +54,10 @@ namespace Game.StateMachines
             {
                 throw new Exception($"State of type {type.Name} could not be found!");
             }
-            
-            return null;
+            else
+            {
+                return CreateState<T>();
+            }
         }
 
         /// <summary>
@@ -64,8 +68,8 @@ namespace Game.StateMachines
         /// <typeparam name="TTo"></typeparam>
         /// <returns></returns>
         private Transition GetTransition<TFrom, TTo>(bool catchException = false)
-            where TFrom : State
-            where TTo : State
+            where TFrom : State, new()
+            where TTo : State, new()
         {
             State fromState = GetState<TFrom>(true);
             State toState = GetState<TTo>(true);
@@ -80,7 +84,7 @@ namespace Game.StateMachines
         /// <typeparam name="TTo"></typeparam>
         /// <returns></returns>
         private Transition GetTransition<TTo>(bool catchException = false)
-            where TTo : State
+            where TTo : State, new()
         {
             State toState = GetState<TTo>(true);
 
@@ -111,7 +115,13 @@ namespace Game.StateMachines
             return null;
         }
 
-        public void AddTransition<TFrom, TTo>()
+        /// <summary>
+        /// Add a transition from State A to State B
+        /// </summary>
+        /// <typeparam name="TFrom"></typeparam>
+        /// <typeparam name="TTo"></typeparam>
+        /// <returns></returns>
+        protected void AddTransition<TFrom, TTo>()
             where TFrom : State, new()
             where TTo : State, new()
         {
@@ -126,8 +136,33 @@ namespace Game.StateMachines
             }
         }
 
+        /// <summary>
+        /// Set the initial State for the start of the State Machine
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        protected void SetInitialState<T>()
+            where T : State, new()
+        {
+            currentState = GetState<T>();
+
+            if (currentState == null)
+            {
+                currentState = CreateState<T>();
+            }
+        }
+
+        public void Start()
+        {
+            if (currentState == null)
+            {
+                throw Log.Exception($"Initial State is null!");
+            }
+
+            currentState.Enter();
+        }
+
         public void ToState<T>()
-            where T : State
+            where T : State, new()
         {
             Transition transition = GetTransition<T>(true);
             currentState = transition.Do();
