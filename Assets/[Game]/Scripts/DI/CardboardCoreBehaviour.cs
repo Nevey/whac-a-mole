@@ -1,7 +1,7 @@
 namespace Game.DI
 {
     /// <summary>
-    /// Extends Unity's MonoBehaviour, but automatically injects and dumps any fields
+    /// Extends Unity's MonoBehaviour, automatically injects and dumps any fields
     /// having the Inject attribute
     /// </summary>
     public abstract class CardboardCoreBehaviour : UnityEngine.MonoBehaviour

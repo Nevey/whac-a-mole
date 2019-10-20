@@ -10,11 +10,13 @@ namespace Game.UI
 
         protected override void OnShow()
         {
+            uiController.Show(UIWidgets.Highscore);
             uiController.Show(UIWidgets.Score);
         }
 
         protected override void OnHide()
         {
+            uiController.Hide(UIWidgets.Highscore);
             uiController.Hide(UIWidgets.Score);
         }
     }

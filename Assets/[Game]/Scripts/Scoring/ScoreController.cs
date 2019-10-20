@@ -14,24 +14,16 @@ namespace Game.Scoring
         private Score totalScore;
         private Score highScore;
 
+        public Score TotalScore => totalScore;
+        public Score HighScore => highScore;
+        public bool NewHighscoreSet { get; private set; }
+
         public event Action<int> ScoreUpdatedEvent;
         public event Action<int> HighscoreUpdatedEvent;
 
         private void Awake()
         {
-            ResetScore();
             highScore = new Score(PlayerPrefs.GetInt(HIGHSCORE_KEY, 0));
-        }
-
-        private void CheckForHighscore()
-        {
-            if (totalScore.value > highScore.value)
-            {
-                highScore = new Score(totalScore.value);
-                PlayerPrefs.SetInt(HIGHSCORE_KEY, highScore.value);
-
-                HighscoreUpdatedEvent?.Invoke(highScore.value);
-            }
         }
 
         private void ShowScore(Score score)
@@ -45,14 +37,26 @@ namespace Game.Scoring
             ShowScore(score);
 
             ScoreUpdatedEvent?.Invoke(totalScore.value);
-
-            // TODO: Do this at the end of the game instead
-            CheckForHighscore();
         }
 
         public void ResetScore()
         {
             totalScore = new Score(0);
+            ScoreUpdatedEvent?.Invoke(totalScore.value);
+            NewHighscoreSet = false;
+        }
+
+        public void CheckForHighscore()
+        {
+            if (totalScore.value > highScore.value)
+            {
+                highScore = new Score(totalScore.value);
+                PlayerPrefs.SetInt(HIGHSCORE_KEY, highScore.value);
+
+                NewHighscoreSet = true;
+
+                HighscoreUpdatedEvent?.Invoke(highScore.value);
+            }
         }
     }
 }

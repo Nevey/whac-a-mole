@@ -16,6 +16,7 @@ namespace Game.UI
         protected override void OnShow()
         {
             scoreController.ScoreUpdatedEvent += OnScoreUpdated;
+            SetScoreText(scoreController.TotalScore.value);
         }
 
         protected override void OnHide()
@@ -24,6 +25,11 @@ namespace Game.UI
         }
 
         private void OnScoreUpdated(int totalScore)
+        {
+            SetScoreText(totalScore);
+        }
+
+        private void SetScoreText(int totalScore)
         {
             scoreText.SetText($"Score: {totalScore}");
         }

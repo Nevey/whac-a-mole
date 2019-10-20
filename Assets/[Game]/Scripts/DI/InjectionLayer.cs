@@ -11,6 +11,7 @@ namespace Game.DI
     {
         private readonly Dictionary<Type, object> dependencies = new Dictionary<Type, object>();
         private readonly Dictionary<object, List<object>> references = new Dictionary<object, List<object>>();
+        private readonly List<object> singletons = new List<object>();
 
         public void InjectIntoField(FieldInfo fieldInfo, InjectableAttribute injectableAttribute, object @object)
         {
@@ -48,6 +49,12 @@ namespace Game.DI
                 }
 
                 dependencies[fieldInfo.FieldType] = injectedInstance;
+
+                // Track all singletons
+                if (!singletons.Contains(injectedInstance))
+                {
+                    singletons.Add(injectedInstance);
+                }
 
                 // Track references to this singleton injected instance
                 if (references.ContainsKey(injectedInstance))
@@ -97,7 +104,7 @@ namespace Game.DI
 
         public void DumpDependencies(object @object)
         {
-            List<object> instancesToRemove = new List<object>();
+            List<object> instancesToDestroy = new List<object>();
 
             foreach (KeyValuePair<object, List<object>> keyValuePair in references)
             {
@@ -126,28 +133,30 @@ namespace Game.DI
                 {
                     Type type = injectedInstance.GetType();
 
-                    if (!dependencies.ContainsKey(type))
+                    dependencies.Remove(type);
+
+                    // Only add non-singletons to list of instances to destroy
+                    if (singletons.Contains(injectedInstance))
                     {
-                        throw Log.Exception("");
+                        continue;
                     }
 
-                    dependencies.Remove(type);
-                    instancesToRemove.Add(injectedInstance);
+                    instancesToDestroy.Add(injectedInstance);
                 }
             }
 
             // Finally remove references by key
-            for (int i = 0; i < instancesToRemove.Count; i++)
+            for (int i = 0; i < instancesToDestroy.Count; i++)
             {
                 Log.Write(
                     $"Clearing <i>Singleton</i> instance of " +
-                    $"<b>{instancesToRemove[i].GetType().Name}</b> as it has no more references left");
+                    $"<b>{instancesToDestroy[i].GetType().Name}</b> as it has no more references left");
 
-                references.Remove(instancesToRemove[i]);
+                references.Remove(instancesToDestroy[i]);
 
-                if (instancesToRemove[i].GetType().IsSubclassOf(typeof(MonoBehaviour)))
+                if (instancesToDestroy[i].GetType().IsSubclassOf(typeof(MonoBehaviour)))
                 {
-                    MonoBehaviour mb = (MonoBehaviour)instancesToRemove[i];
+                    MonoBehaviour mb = (MonoBehaviour)instancesToDestroy[i];
                     if (mb == null)
                     {
                         continue;
@@ -164,7 +173,7 @@ namespace Game.DI
                 }
                 else
                 {
-                    instancesToRemove[i] = null;
+                    instancesToDestroy[i] = null;
                 }
             }
         }
