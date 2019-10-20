@@ -7,6 +7,10 @@ using Object = UnityEngine.Object;
 
 namespace Game.DI
 {
+    /// <summary>
+    /// Handles the actual injection into and dumping from fields. Multiple of these layers can co-exist.
+    /// Keeps track of references to specific injections and cleans them up when being dumped.
+    /// </summary>
     public class InjectionLayer
     {
         private readonly Dictionary<Type, object> dependencies = new Dictionary<Type, object>();

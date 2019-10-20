@@ -3,6 +3,10 @@ using UnityEngine;
 
 namespace Game.Spawning
 {
+    /// <summary>
+    /// Point in world space to spawn an ISpawnable.
+    /// Is aware whether it's currently blocked/used by an ISpawnable or not.
+    /// </summary>
     public class SpawnPoint : MonoBehaviour 
     {
         public event Action<SpawnPoint> SpawnPointFreedEvent;

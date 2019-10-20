@@ -5,7 +5,11 @@ using UnityEngine;
 
 namespace Game.Spawning
 {
-    [Injectable(Singleton = true)]
+    /// <summary>
+    /// Extend from this class with a specific ISpawnable.
+    /// Handles spawning based on several spawn points. Based on an interval new ISpawnables will be spawned.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public abstract class SpawnController<T> : CardboardCoreBehaviour
         where T : ISpawnable, new()
     {

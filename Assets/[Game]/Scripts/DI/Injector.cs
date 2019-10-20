@@ -3,6 +3,9 @@ using Utilities;
 
 namespace Game.DI
 {
+    /// <summary>
+    /// Static class to kick off any object to Inject into or Dump from given fields
+    /// </summary>
     public static class Injector
     {
         public static void Inject(object @object)

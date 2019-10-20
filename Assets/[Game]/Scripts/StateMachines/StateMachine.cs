@@ -4,6 +4,10 @@ using Utilities;
 
 namespace Game.StateMachines
 {
+    /// <summary>
+    /// Simple to use state machine. Create Transitions from State and to State and set an initial State before starting it.
+    /// Use "GoToState" to Transition into a specific state, if this Transition is available.
+    /// </summary>
     public abstract class StateMachine
     {
         private Dictionary<Type, State> stateDict =

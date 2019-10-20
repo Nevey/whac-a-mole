@@ -47,5 +47,10 @@ namespace Game.UI
         {
             StartTimer();
         }
+
+        public void StopBlinking()
+        {
+            StopTimer();
+        }
     }
 }

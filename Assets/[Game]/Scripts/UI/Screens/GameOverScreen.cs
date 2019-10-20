@@ -80,6 +80,7 @@ namespace Game.UI
 
         private void OnTap(Vector2 obj)
         {
+            tapToContinueBlinker.StopBlinking();
             applicationStateMachine.ToState<MenuState>();
         }
     }

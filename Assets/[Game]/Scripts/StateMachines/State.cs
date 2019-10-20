@@ -3,6 +3,9 @@ using Utilities;
 
 namespace Game.StateMachines
 {
+    /// <summary>
+    /// Core State used by the StateMachine. Extend from this class to create your own State.
+    /// </summary>
     public abstract class State
     {
         protected abstract void OnEnter();

@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace Game.Moles
 {
+    /// <summary>
+    /// Is Injectable.
+    /// Spawns Mole objects based on SpawnController's core logic.
+    /// </summary>
     [Injectable(Singleton = true)]
     public class MoleSpawnController : SpawnController<Mole>
     {

@@ -5,6 +5,10 @@ using Utilities;
 
 namespace Game.DI
 {
+    /// <summary>
+    /// Handles the existence or creates different injection layers.
+    /// Different injection layers in parallel can create more control over memory footprint.
+    /// </summary>
     public static class InjectionLayerManager
     {
         private static readonly Dictionary<Type, InjectionLayer> injectionLayers = new Dictionary<Type, InjectionLayer>();

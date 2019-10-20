@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace Game.Timers
 {
+    /// <summary>
+    /// A simple Timer object running on Unity's deltaTime.
+    /// </summary>
     public class Timer : MonoBehaviour
     {
         private bool isStarted;

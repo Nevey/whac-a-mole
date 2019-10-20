@@ -1,6 +1,11 @@
 namespace Game.StateMachines
 {
-    public class Transition
+    /// <summary>
+    /// Transition between two States in one direction.
+    /// Is automatically created on runtime based on a StateMachine's required Transitions.
+    /// Should not be extended from.
+    /// </summary>
+    public sealed class Transition
     {
         private readonly State from;
         private readonly State to;

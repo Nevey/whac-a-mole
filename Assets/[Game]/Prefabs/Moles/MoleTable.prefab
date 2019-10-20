@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minWaitDuration: 0.1
-  maxWaitDuration: 0.5
+  maxWaitDuration: 0.3
   spawnPoints:
   - {fileID: 1912606236085721566}
   - {fileID: 3506535115543207407}

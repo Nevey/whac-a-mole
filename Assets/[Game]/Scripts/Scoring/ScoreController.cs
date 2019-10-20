@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace Game.Scoring
 {
+    /// <summary>
+    /// Handles everything score related over current play session.
+    /// </summary>
     [Injectable(Singleton = true)]
     public class ScoreController : MonoBehaviour
     {

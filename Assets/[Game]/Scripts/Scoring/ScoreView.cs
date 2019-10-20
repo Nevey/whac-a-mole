@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace Game.Scoring
 {
+    /// <summary>
+    /// World space score view. Is shown at the position of recently hit IWhackable
+    /// </summary>
     public class ScoreView : CardboardCoreBehaviour
     {
         [Inject] private TimerController timerController;

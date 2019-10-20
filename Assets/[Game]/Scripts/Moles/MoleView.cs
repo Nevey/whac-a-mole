@@ -4,7 +4,9 @@ using UnityEngine;
 
 namespace Game.Moles
 {
-    // TODO: Create abstract view class or view interface
+    /// <summary>
+    /// Plays animations on show and hide moments.
+    /// </summary>
     public class MoleView : MonoBehaviour
     {
         private Tween moveTween;

@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace Game.Whacking
 {
+    /// <summary>
+    /// Tries to find an IWhackable and whack it, based on given user input.
+    /// </summary>
     public class WhackableHitter : CardboardCoreBehaviour
     {
         [Inject] private MouseInput mouseInput;

@@ -8,13 +8,18 @@ using UnityEngine;
 
 namespace Game.Moles
 {
+    /// <summary>
+    /// Core of the Mole behaviour. Controls score value, visuals and lifespan timer, and is IWhackable and ISpawnable
+    /// </summary>
     public class Mole : CardboardCoreBehaviour, ISpawnable, IWhackable
     {
         [Inject] private TimerController timerController;
 
+        [SerializeField] private new Collider collider;
         [SerializeField, Range(0.1f, 3f)] private float minShowDuration = 0.5f;
         [SerializeField, Range (0.1f, 3f)] private float maxShowDuration = 2f;
         [SerializeField] private MoleView moleViewPrefab;
+        [SerializeField] private int defaultScoreValue = 10;
 
         private MoleView moleViewInstance;
         private Timer timerInstance;
@@ -60,18 +65,19 @@ namespace Game.Moles
 
         public void Despawn()
         {
+            collider.enabled = false;
             timerController.KillTimer(this);
             Hide();
         }
 
         public Score Hit()
         {
-            int scoreValue = 10;
+            int scoreValue = defaultScoreValue;
 
             if (timerInstance != null)
             {
                 scoreValue =
-                    Mathf.RoundToInt((10 / timerInstance.TargetDuration)
+                    (int)Mathf.Ceil((defaultScoreValue / timerInstance.TargetDuration)
                     * (timerInstance.TargetDuration - timerInstance.CurrentDuration));
             }
 

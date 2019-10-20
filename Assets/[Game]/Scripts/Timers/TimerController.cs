@@ -6,6 +6,9 @@ using UnityEngine;
 
 namespace Game.Timers
 {
+    /// <summary>
+    /// Global way for controlling your timers. Creates and Kills timers based on which object is starting a Timer.
+    /// </summary>
     [Injectable(Singleton = true)]
     public class TimerController : MonoBehaviour
     {

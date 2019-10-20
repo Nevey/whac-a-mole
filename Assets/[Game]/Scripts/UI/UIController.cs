@@ -19,6 +19,10 @@ namespace Game.UI
         Score
     }
 
+    /// <summary>
+    /// Is Injectable as Singleton.
+    /// Use this controller to show UIScreens and to show/hide UIWidgets.
+    /// </summary>
     [Injectable(Singleton = true)]
     public class UIController : MonoBehaviour
     {
