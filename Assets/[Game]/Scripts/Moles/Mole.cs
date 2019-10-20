@@ -27,7 +27,9 @@ namespace Game.Moles
         private void Show()
         {
             moleViewInstance = Instantiate(moleViewPrefab, transform);
-            moleViewInstance.Show(StartTimer);
+            moleViewInstance.Show(null);
+
+            StartTimer();
         }
 
         private void Hide()

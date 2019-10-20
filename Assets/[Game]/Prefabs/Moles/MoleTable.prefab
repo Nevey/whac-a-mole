@@ -51,10 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e28bc4d406fb4741a03c88def62b7d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerPrefab: {fileID: 3632527021234142715, guid: 08e4d8950504556408d244b33e2fa1e2,
-    type: 3}
-  minWaitDuration: 0.2
-  maxWaitDuration: 2
+  minWaitDuration: 0.1
+  maxWaitDuration: 0.5
   spawnPoints:
   - {fileID: 1912606236085721566}
   - {fileID: 3506535115543207407}
