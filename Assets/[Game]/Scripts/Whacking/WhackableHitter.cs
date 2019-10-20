@@ -32,7 +32,7 @@ namespace Game.Whacking
             }
 
             Score score = whackable.Hit();
-            scoreController.AddScore(score);
+            scoreController.AddScore(score, whackable);
         }
 
         private IWhackable GetWhackable(Vector2 screenPosition)

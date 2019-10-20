@@ -43,4 +43,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f2c7c045586b9244b350cea9f99ed85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreViewPrefab: {fileID: 0}
+  scoreViewPrefab: {fileID: 4374710342853898772, guid: 735137b2726c1c2419b35d91c70f0294,
+    type: 3}

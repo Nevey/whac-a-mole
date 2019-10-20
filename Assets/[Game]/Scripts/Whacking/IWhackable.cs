@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Game.Whacking
 {
     public interface IWhackable
@@ -7,5 +9,6 @@ namespace Game.Whacking
         /// </summary>
         /// <returns>Score</returns>
         Scoring.Score Hit();
+        Vector3 Position { get; }
     }
 }

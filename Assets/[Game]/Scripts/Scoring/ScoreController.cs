@@ -1,5 +1,6 @@
 using System;
 using Game.DI;
+using Game.Whacking;
 using UnityEngine;
 
 namespace Game.Scoring
@@ -26,15 +27,16 @@ namespace Game.Scoring
             highScore = new Score(PlayerPrefs.GetInt(HIGHSCORE_KEY, 0));
         }
 
-        private void ShowScore(Score score)
+        private void ShowScore(Score score, IWhackable whackable)
         {
-            // TODO: Show score, spawn ScoreView prefab
+            ScoreView scoreView = Instantiate(scoreViewPrefab);
+            scoreView.Play(score, whackable.Position);
         }
 
-        public void AddScore(Score score)
+        public void AddScore(Score score, IWhackable whackable)
         {
             totalScore = new Score(totalScore.value + score.value);
-            ShowScore(score);
+            ShowScore(score, whackable);
 
             ScoreUpdatedEvent?.Invoke(totalScore.value);
         }

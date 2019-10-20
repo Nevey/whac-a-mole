@@ -19,6 +19,8 @@ namespace Game.Moles
         private MoleView moleViewInstance;
         private Timer timerInstance;
 
+        public Vector3 Position => transform.position;
+
         public event Action<ISpawnable> OnSpawnEvent;
         public event Action<ISpawnable> OnDespawnEvent;
 
